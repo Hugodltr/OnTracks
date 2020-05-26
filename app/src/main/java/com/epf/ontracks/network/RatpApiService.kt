@@ -1,13 +1,16 @@
 package com.epf.ontracks.network
 
+import com.epf.ontracks.lineslist.*
+import com.epf.ontracks.station.StationResult
+import com.epf.ontracks.stationslist.StationsResult
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.Deferred
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 // API url
 private const val BASE_URL = "https://api-ratp.pierre-grimaud.fr/v4/"
@@ -30,6 +33,18 @@ interface RatpApiService {
     @GET("lines")
     fun getLines():
             Deferred<LinesResult>
+
+    @GET("stations/{type}/{code}")
+    fun getStations(@Path("type") type: String, @Path("code") code: String):
+            Deferred<StationsResult>
+
+    @GET("schedules/{type}/{code}/{station}/{way}")
+    fun getStation(@Path("type") type: String, @Path("code") code: String, @Path("station") station: String, @Path("way") way: Char?):
+            Deferred<StationResult>
+
+    @GET("traffic")
+    fun getAllTraffic():
+            Deferred<AllTrafficResult>
 }
 
 // init the retrofit service

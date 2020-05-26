@@ -14,11 +14,6 @@ import com.epf.ontracks.databinding.LinesListFragmentBinding
 class LinesListFragment : Fragment() {
 
     private lateinit var binding : LinesListFragmentBinding
-
-    companion object {
-        fun newInstance() = LinesListFragment()
-    }
-
     private lateinit var viewModel: LinesListViewModel
 
     override fun onCreateView(

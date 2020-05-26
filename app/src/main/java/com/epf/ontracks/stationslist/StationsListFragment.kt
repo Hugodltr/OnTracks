@@ -13,11 +13,6 @@ import com.epf.ontracks.databinding.StationsListFragmentBinding
 class StationsListFragment : Fragment() {
 
     private lateinit var binding: StationsListFragmentBinding
-
-    companion object {
-        fun newInstance() = StationsListFragment()
-    }
-
     private lateinit var viewModel: StationsListViewModel
 
     override fun onCreateView(

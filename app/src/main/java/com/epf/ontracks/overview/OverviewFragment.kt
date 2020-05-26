@@ -13,11 +13,6 @@ import com.epf.ontracks.databinding.OverviewFragmentBinding
 class OverviewFragment : Fragment() {
 
     private lateinit var binding : OverviewFragmentBinding
-
-    companion object {
-        fun newInstance() = OverviewFragment()
-    }
-
     private lateinit var viewModel: OverviewViewModel
 
     override fun onCreateView(
