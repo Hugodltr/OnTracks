@@ -1,35 +1,46 @@
 package com.epf.ontracks.lineslist
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.epf.ontracks.network.LinesResult
 import com.epf.ontracks.network.RatpApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+
 
 class LinesListViewModel : ViewModel() {
 
-    private val _response = MutableLiveData<String>()
-    val response : LiveData<String>
-        get() = _response
+    private val _lines = MutableLiveData<LinesResult>()
+    val lines : LiveData<LinesResult>
+        get() = _lines
+
+    // coroutine
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
     init {
-        _response.value = "Fetching"
         getLines()
     }
 
     private fun getLines() {
-        RatpApi.retrofitService.getProperties().enqueue(object: Callback<String> {
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                _response.value = "Failure" + t.message
-            }
+        coroutineScope.launch {
+            val getPropertiesDeferred = RatpApi.retrofitService.getLines()
 
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                _response.value = response.body()
+            try {
+                val res = getPropertiesDeferred.await()
+                _lines.value = res
+            } catch (e: Exception) {
+                //_response.value = "Failure: ${e.message}"
             }
-        })
+        }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
     }
 
 }

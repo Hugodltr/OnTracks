@@ -1,12 +1,12 @@
 package com.epf.ontracks.station
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import com.epf.ontracks.R
 import com.epf.ontracks.databinding.StationFragmentBinding
 
@@ -24,17 +24,12 @@ class StationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.station_fragment,container,false)
-        viewModel = ViewModelProviders.of(this).get(StationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(StationViewModel::class.java)
+
+        binding.lifecycleOwner = this
 
         binding.stationViewModel = viewModel
 
         return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(StationViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }
