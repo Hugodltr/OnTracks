@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">On Tracks</string>
+    <string name="metro_image_desc">Metro image</string>
+    <string name="metros_header">Liste des métros</string>
 </resources>
