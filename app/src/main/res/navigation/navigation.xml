@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/overviewFragment">
+
+    <fragment
+        android:id="@+id/overviewFragment"
+        android:name="com.epf.ontracks.overview.OverviewFragment"
+        android:label="OverviewFragment"
+        tools:layout="@layout/overview_fragment">
+        <action
+            android:id="@+id/action_overviewFragment_to_linesListFragment"
+            app:destination="@id/linesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/linesListFragment"
+        android:name="com.epf.ontracks.lineslist.LinesListFragment"
+        android:label="LinesListFragment"
+        tools:layout="@layout/lines_list_fragment">
+        <action
+            android:id="@+id/action_linesListFragment_to_stationsListFragment"
+            app:destination="@id/stationsListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stationsListFragment"
+        android:name="com.epf.ontracks.stationslist.StationsListFragment"
+        android:label="StationsListFragment"
+        tools:layout="@layout/stations_list_fragment">
+        <argument
+            android:name="line"
+            app:argType="com.epf.ontracks.lineslist.Line" />
+        <argument
+            android:name="lineType"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/stationFragment"
+        android:name="com.epf.ontracks.station.StationFragment"
+        android:label="StationFragment"
+        tools:layout="@layout/station_fragment"/>
+</navigation>

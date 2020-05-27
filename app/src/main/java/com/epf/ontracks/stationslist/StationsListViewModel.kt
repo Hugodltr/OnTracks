@@ -1,5 +1,6 @@
 package com.epf.ontracks.stationslist
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,22 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class StationsListViewModel : ViewModel() {
+class StationsListViewModel(val line: Line, val type: String) : ViewModel() {
+
     // live data
     private val _stations = MutableLiveData<Stations>()
     val stations : LiveData<Stations>
         get() = _stations
-
-    // route parameters
-    private val _line = MutableLiveData<Line>()
-    val line : LiveData<Line>
-        get() = _line
-
-    private val _traffic = MutableLiveData<LineTraffic>()
-    val traffic : LiveData<LineTraffic>
-        get() = _traffic
-
-    private lateinit var type: String
 
     // coroutine
     private var viewModelJob = Job()
@@ -38,13 +29,14 @@ class StationsListViewModel : ViewModel() {
 
     private fun getStations() {
         coroutineScope.launch {
-            val getLinesDeferred = RatpApi.retrofitService.getStations(type, _line.value!!.code)
+            val getLinesDeferred = RatpApi.retrofitService.getStations(type, line.code)
 
             try {
                 val resStations = getLinesDeferred.await()
                 _stations.value = resStations.result
+                Log.i("Hugo", resStations.toString())
             } catch (e: Exception) {
-                //_response.value = "Failure: ${e.message}"
+                Log.i("Hugo", "Failure: ${e.message}")
             }
         }
     }

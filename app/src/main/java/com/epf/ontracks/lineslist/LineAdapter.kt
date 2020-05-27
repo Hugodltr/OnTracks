@@ -5,32 +5,35 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.epf.ontracks.databinding.LineItemViewBinding
+import com.epf.ontracks.databinding.ListItemLineBinding
+import com.epf.ontracks.network.LineTraffic
 
 
-class LineAdapter : ListAdapter<Line, LineAdapter.ViewHolder>(LineDiffCallback()) {
+class LineAdapter(val clickListener: LineListener) : ListAdapter<Line, LineAdapter.ViewHolder>(LineDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = getItem(position)
-
-        holder.bind(item)
+        holder.bind(getItem(position), clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: LineItemViewBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(val binding: ListItemLineBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(item: Line) {
+        fun bind(
+            item: Line,
+            clickListener: LineListener
+        ) {
             binding.line = item
+            binding.clickListener = clickListener
             binding.executePendingBindings()
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = LineItemViewBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemLineBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }
@@ -46,4 +49,8 @@ class LineDiffCallback : DiffUtil.ItemCallback<Line>() {
     override fun areContentsTheSame(oldItem: Line, newItem: Line): Boolean {
         return oldItem == newItem
     }
+}
+
+class LineListener(val clickListener: (line: Line, lineType: String) -> Unit) {
+    fun onClick(line: Line, lineType: String) = clickListener(line, lineType)
 }
