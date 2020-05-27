@@ -13,5 +13,4 @@ class StationViewModelFactory(private val code: String, private val station: Sta
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
-
 }

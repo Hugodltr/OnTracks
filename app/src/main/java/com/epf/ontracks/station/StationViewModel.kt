@@ -12,8 +12,8 @@ import kotlinx.coroutines.launch
 
 class StationViewModel(val code: String, val station: Station, val type: String): ViewModel() {
 
-    private val _schedules = MutableLiveData<Schedules>()
-    val schedules : LiveData<Schedules>
+    private val _schedules = MutableLiveData<List<Schedule>>()
+    val schedules : LiveData<List<Schedule>>
         get() = _schedules
 
     private val _way = MutableLiveData<Char>()
@@ -25,6 +25,7 @@ class StationViewModel(val code: String, val station: Station, val type: String)
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
 
     init {
+        _way.value = 'A'
         getStation()
     }
 
@@ -34,7 +35,7 @@ class StationViewModel(val code: String, val station: Station, val type: String)
 
             try {
                 val resStation = getStationDeferred.await()
-                _schedules.value = resStation.result
+                _schedules.value = resStation.result.schedules
             } catch (e: Exception) {
                 //_response.value = "Failure: ${e.message}"
             }

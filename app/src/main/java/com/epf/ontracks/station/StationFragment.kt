@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.epf.ontracks.R
 import com.epf.ontracks.databinding.StationFragmentBinding
@@ -26,8 +27,16 @@ class StationFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(StationViewModel::class.java)
 
         binding.lifecycleOwner = this
-
         binding.stationViewModel = viewModel
+
+        val adapter = ScheduleAdapter()
+        binding.schedulesList.adapter = adapter
+
+        viewModel.schedules.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+            }
+        })
 
         return binding.root
     }

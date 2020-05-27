@@ -15,7 +15,7 @@
         tools:context="com.epf.ontracks.stationslist.StationsListFragment">
 
         <TextView
-            android:id="@+id/line_name"
+            android:id="@+id/schedule_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line_name"
+            app:layout_constraintTop_toBottomOf="@+id/schedule_time"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
