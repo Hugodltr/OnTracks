@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.epf.ontracks.databinding.ListItemLineBinding
-import com.epf.ontracks.network.LineTraffic
 
 
 class LineAdapter(val clickListener: LineListener) : ListAdapter<Line, LineAdapter.ViewHolder>(LineDiffCallback()) {
@@ -20,11 +19,7 @@ class LineAdapter(val clickListener: LineListener) : ListAdapter<Line, LineAdapt
     }
 
     class ViewHolder private constructor(val binding: ListItemLineBinding) : RecyclerView.ViewHolder(binding.root){
-
-        fun bind(
-            item: Line,
-            clickListener: LineListener
-        ) {
+        fun bind(item: Line,clickListener: LineListener) {
             binding.line = item
             binding.clickListener = clickListener
             binding.executePendingBindings()

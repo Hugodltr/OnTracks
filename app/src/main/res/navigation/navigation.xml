@@ -34,10 +34,23 @@
         <argument
             android:name="lineType"
             app:argType="string" />
+        <action
+            android:id="@+id/action_stationsListFragment_to_stationFragment"
+            app:destination="@id/stationFragment" />
     </fragment>
     <fragment
         android:id="@+id/stationFragment"
         android:name="com.epf.ontracks.station.StationFragment"
         android:label="StationFragment"
-        tools:layout="@layout/station_fragment"/>
+        tools:layout="@layout/station_fragment">
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="code"
+            app:argType="string" />
+        <argument
+            android:name="station"
+            app:argType="com.epf.ontracks.stationslist.Station" />
+    </fragment>
 </navigation>

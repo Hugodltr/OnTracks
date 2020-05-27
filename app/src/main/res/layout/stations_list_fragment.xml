@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -8,15 +9,37 @@
             type="com.epf.ontracks.stationslist.StationsListViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".stationslist.StationsListFragment">
+        tools:context="com.epf.ontracks.stationslist.StationsListFragment">
 
         <TextView
+            android:id="@+id/line_name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/stations_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Metro 1"
+            android:text="@{stationsListViewModel.line.name}"/>
 
-    </FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/stations_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_name"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -14,12 +14,16 @@ class StationFragment : Fragment() {
 
     private lateinit var binding: StationFragmentBinding
     private lateinit var viewModel: StationViewModel
+    private lateinit var viewModelFactory: StationViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.station_fragment,container,false)
-        viewModel = ViewModelProvider(this).get(StationViewModel::class.java)
+
+        val args = StationFragmentArgs.fromBundle(requireArguments())
+        viewModelFactory = StationViewModelFactory(args.code, args.station, args.type)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(StationViewModel::class.java)
 
         binding.lifecycleOwner = this
 

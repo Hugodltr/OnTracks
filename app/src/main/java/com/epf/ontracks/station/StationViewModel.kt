@@ -10,11 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class StationViewModel : ViewModel() {
-    // live data
-    private val _station = MutableLiveData<Station>()
-    val station : LiveData<Station>
-        get() = _station
+class StationViewModel(val code: String, val station: Station, val type: String): ViewModel() {
 
     private val _schedules = MutableLiveData<Schedules>()
     val schedules : LiveData<Schedules>
@@ -23,10 +19,6 @@ class StationViewModel : ViewModel() {
     private val _way = MutableLiveData<Char>()
     val way : LiveData<Char>
         get() = _way
-
-    // route parameters
-    private lateinit var type: String
-    private lateinit var code: String
 
     // coroutine
     private var viewModelJob = Job()
@@ -38,7 +30,7 @@ class StationViewModel : ViewModel() {
 
     private fun getStation() {
         coroutineScope.launch {
-            val getStationDeferred = RatpApi.retrofitService.getStation(type, code, _station.value!!.slug, _way.value)
+            val getStationDeferred = RatpApi.retrofitService.getStation(type, code, station.slug, _way.value)
 
             try {
                 val resStation = getStationDeferred.await()

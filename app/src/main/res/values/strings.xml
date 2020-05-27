@@ -3,4 +3,5 @@
     <string name="metro_image_desc">Metro image</string>
     <string name="metros_header">Liste des métros</string>
     <string name="toLines_button">Horaires</string>
+    <string name="schedule_image">Schedule image</string>
 </resources>

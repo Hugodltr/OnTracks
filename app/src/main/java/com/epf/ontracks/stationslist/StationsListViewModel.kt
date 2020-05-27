@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.epf.ontracks.lineslist.Line
-import com.epf.ontracks.network.LineTraffic
 import com.epf.ontracks.network.RatpApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -15,13 +14,23 @@ import kotlinx.coroutines.launch
 class StationsListViewModel(val line: Line, val type: String) : ViewModel() {
 
     // live data
-    private val _stations = MutableLiveData<Stations>()
-    val stations : LiveData<Stations>
+    private val _stations = MutableLiveData<List<Station>>()
+    val stations : LiveData<List<Station>>
         get() = _stations
 
     // coroutine
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
+
+    // navigation
+    private val _navigateToStation = MutableLiveData<Boolean>()
+    val navigateToStation: LiveData<Boolean>
+        get() = _navigateToStation
+
+    // navigation parameter
+    private val _station = MutableLiveData<Station>()
+    val station: LiveData<Station>
+        get() = _station
 
     init {
         getStations()
@@ -33,12 +42,16 @@ class StationsListViewModel(val line: Line, val type: String) : ViewModel() {
 
             try {
                 val resStations = getLinesDeferred.await()
-                _stations.value = resStations.result
-                Log.i("Hugo", resStations.toString())
+                _stations.value = resStations.result.stations
             } catch (e: Exception) {
                 Log.i("Hugo", "Failure: ${e.message}")
             }
         }
+    }
+
+    fun navigateToStation(navigating: Boolean, station: Station?) {
+        _navigateToStation.value = navigating
+        _station.value = station
     }
 
     override fun onCleared() {
