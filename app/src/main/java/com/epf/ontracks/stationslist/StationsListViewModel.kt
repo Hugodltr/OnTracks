@@ -38,7 +38,7 @@ class StationsListViewModel(val line: Line, val type: String) : ViewModel() {
 
     private fun getStations() {
         coroutineScope.launch {
-            val getLinesDeferred = RatpApi.retrofitService.getStations(type, line.code)
+            val getLinesDeferred = RatpApi.retrofitService.getStationsAsync(type, line.code)
 
             try {
                 val resStations = getLinesDeferred.await()
@@ -50,8 +50,8 @@ class StationsListViewModel(val line: Line, val type: String) : ViewModel() {
     }
 
     fun navigateToStation(navigating: Boolean, station: Station?) {
-        _navigateToStation.value = navigating
         _station.value = station
+        _navigateToStation.value = navigating
     }
 
     override fun onCleared() {

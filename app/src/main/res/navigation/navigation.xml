@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_overviewFragment_to_linesListFragment"
             app:destination="@id/linesListFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_stationFragment"
+            app:destination="@id/stationFragment" />
     </fragment>
     <fragment
         android:id="@+id/linesListFragment"
@@ -52,5 +55,8 @@
         <argument
             android:name="station"
             app:argType="com.epf.ontracks.stationslist.Station" />
+        <argument
+            android:name="id"
+            app:argType="long" />
     </fragment>
 </navigation>

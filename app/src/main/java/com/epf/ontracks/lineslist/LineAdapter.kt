@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.epf.ontracks.databinding.ListItemLineBinding
 
 
-class LineAdapter(val clickListener: LineListener) : ListAdapter<Line, LineAdapter.ViewHolder>(LineDiffCallback()) {
+class LineAdapter(private val clickListener: LineListener) : ListAdapter<Line, LineAdapter.ViewHolder>(LineDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
@@ -18,7 +18,7 @@ class LineAdapter(val clickListener: LineListener) : ListAdapter<Line, LineAdapt
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: ListItemLineBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(private val binding: ListItemLineBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: Line,clickListener: LineListener) {
             binding.line = item
             binding.clickListener = clickListener

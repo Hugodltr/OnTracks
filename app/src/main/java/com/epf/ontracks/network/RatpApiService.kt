@@ -1,6 +1,6 @@
 package com.epf.ontracks.network
 
-import com.epf.ontracks.lineslist.*
+import com.epf.ontracks.lineslist.LinesResult
 import com.epf.ontracks.station.StationResult
 import com.epf.ontracks.stationslist.StationsResult
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
@@ -31,19 +31,19 @@ private val retrofit = Retrofit.Builder()
 // retrofit request
 interface RatpApiService {
     @GET("lines")
-    fun getLines():
+    fun getLinesAsync():
             Deferred<LinesResult>
 
     @GET("stations/{type}/{code}")
-    fun getStations(@Path("type") type: String, @Path("code") code: String):
+    fun getStationsAsync(@Path("type") type: String, @Path("code") code: String):
             Deferred<StationsResult>
 
     @GET("schedules/{type}/{code}/{station}/{way}")
-    fun getStation(@Path("type") type: String, @Path("code") code: String, @Path("station") station: String, @Path("way") way: Char?):
+    fun getStationAsync(@Path("type") type: String, @Path("code") code: String, @Path("station") station: String, @Path("way") way: Char?):
             Deferred<StationResult>
 
     @GET("traffic")
-    fun getAllTraffic():
+    fun getAllTrafficAsync():
             Deferred<AllTrafficResult>
 }
 

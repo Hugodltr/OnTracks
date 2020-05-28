@@ -18,7 +18,7 @@ class ScheduleAdapter: ListAdapter<Schedule, ScheduleAdapter.ViewHolder>(Schedul
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: ListItemScheduleBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder private constructor(private val binding: ListItemScheduleBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(item: Schedule) {
             binding.schedule = item
             binding.executePendingBindings()

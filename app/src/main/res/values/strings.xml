@@ -4,4 +4,6 @@
     <string name="metros_header">Liste des métros</string>
     <string name="toLines_button">Horaires</string>
     <string name="schedule_image">Schedule image</string>
+    <string name="switch_direction_button_text">Switch Direction</string>
+    <string name="favorite_text">Vos favoris</string>
 </resources>

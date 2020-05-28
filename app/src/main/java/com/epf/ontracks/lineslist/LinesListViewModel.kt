@@ -70,8 +70,8 @@ class LinesListViewModel : ViewModel() {
 
     private fun getLines() {
         coroutineScope.launch {
-            val getLinesDeferred = RatpApi.retrofitService.getLines()
-            val getTrafficDeferred = RatpApi.retrofitService.getAllTraffic()
+            val getLinesDeferred = RatpApi.retrofitService.getLinesAsync()
+            val getTrafficDeferred = RatpApi.retrofitService.getAllTrafficAsync()
 
             try {
                 val resLines = getLinesDeferred.await()
