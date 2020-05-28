@@ -5,25 +5,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.epf.ontracks.database.FavoriteDatabaseDAO
 import com.epf.ontracks.database.StationEntity
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 
 class OverviewViewModel(database: FavoriteDatabaseDAO) : ViewModel() {
 
-    // live data
+    // navigation
     private val _navigateToLines = MutableLiveData<Boolean>()
     val navigateToLines : LiveData<Boolean>
         get() = _navigateToLines
 
-    // coroutine
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
-
-    // navigation
     private val _navigateToStation = MutableLiveData<Boolean>()
     val navigateToStation: LiveData<Boolean>
         get() = _navigateToStation
+
+    private val _navigateToScanner = MutableLiveData<Boolean>()
+    val navigateToScanner: LiveData<Boolean>
+        get() = _navigateToScanner
 
     // navigation parameter
     private val _station = MutableLiveData<StationEntity>()
@@ -38,13 +34,12 @@ class OverviewViewModel(database: FavoriteDatabaseDAO) : ViewModel() {
         _navigateToLines.value = navigating
     }
 
+    fun navigateToScanner(navigating: Boolean) {
+        _navigateToScanner.value = navigating
+    }
+
     fun navigateToStation(navigating: Boolean, station: StationEntity?) {
         _station.value = station
         _navigateToStation.value = navigating
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 }

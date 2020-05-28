@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_overviewFragment_to_stationFragment"
             app:destination="@id/stationFragment" />
+        <action
+            android:id="@+id/action_overviewFragment_to_scannerFragment"
+            app:destination="@id/scannerFragment" />
     </fragment>
     <fragment
         android:id="@+id/linesListFragment"
@@ -58,5 +61,13 @@
         <argument
             android:name="id"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/scannerFragment"
+        android:name="com.epf.ontracks.scanner.ScannerFragment"
+        android:label="ScannerFragment" >
+        <action
+            android:id="@+id/action_scannerFragment_to_stationFragment"
+            app:destination="@id/stationFragment" />
     </fragment>
 </navigation>

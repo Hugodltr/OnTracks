@@ -26,17 +26,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/linesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:text="@string/toLines_button"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> overviewViewModel.navigateToLines(true)}"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorite_list"
             android:layout_width="0dp"
@@ -45,11 +34,34 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/linesButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/favorite_test"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layout_constraintTop_toBottomOf="@+id/favorite_test" />
+
+        <Button
+            android:id="@+id/toBarcode_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/barcodeButton_text"
+            app:layout_constraintBaseline_toBaselineOf="@+id/linesButton"
+            app:layout_constraintEnd_toStartOf="@+id/linesButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            android:onClick="@{() -> overviewViewModel.navigateToScanner(true)}"/>
+
+        <Button
+            android:id="@+id/linesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:onClick="@{() -> overviewViewModel.navigateToLines(true)}"
+            android:text="@string/toLines_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/toBarcode_button" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

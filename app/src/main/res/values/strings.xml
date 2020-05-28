@@ -6,4 +6,5 @@
     <string name="schedule_image">Schedule image</string>
     <string name="switch_direction_button_text">Switch Direction</string>
     <string name="favorite_text">Vos favoris</string>
+    <string name="barcodeButton_text">Scanner un QR Code</string>
 </resources>
