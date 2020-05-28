@@ -16,13 +16,14 @@ data class LinesResult(
     val result: Lines
 )
 
+@Parcelize
 data class Lines(
     val metros: List<Line>,
     val rers: List<Line>,
     val tramways: List<Line>,
     val buses: List<Line>,
     val noctiliens: List<Line>
-)
+) : Parcelable
 
 
 

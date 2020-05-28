@@ -3,15 +3,12 @@ package com.epf.ontracks.lineslist
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.epf.ontracks.network.LineTraffic
-import com.epf.ontracks.network.RatpApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 
 
-class LinesListViewModel : ViewModel() {
+class LinesListViewModel(lines: Lines) : ViewModel() {
 
     // live data
     private val _metros = MutableLiveData<List<Line>>()
@@ -34,18 +31,6 @@ class LinesListViewModel : ViewModel() {
     val noctiliens: LiveData<List<Line>>
         get() = _noctiliens
 
-    private val _trafficMetros = MutableLiveData<List<LineTraffic>>()
-    val trafficMetro: LiveData<List<LineTraffic>>
-        get() = _trafficMetros
-
-    private val _trafficRers = MutableLiveData<List<LineTraffic>>()
-    val trafficRers: LiveData<List<LineTraffic>>
-        get() = _trafficRers
-
-    private val _trafficTramways = MutableLiveData<List<LineTraffic>>()
-    val trafficTramways: LiveData<List<LineTraffic>>
-        get() = _trafficTramways
-
     // coroutine
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
@@ -65,32 +50,14 @@ class LinesListViewModel : ViewModel() {
         get() = _lineType
 
     init {
-        getLines()
+        _metros.value = lines.metros
+        _rers.value = lines.rers
+        _tramways.value = lines.tramways
+        _buses.value = lines.buses
+        _noctiliens.value = lines.noctiliens
     }
 
-    private fun getLines() {
-        coroutineScope.launch {
-            val getLinesDeferred = RatpApi.retrofitService.getLinesAsync()
-            val getTrafficDeferred = RatpApi.retrofitService.getAllTrafficAsync()
-
-            try {
-                val resLines = getLinesDeferred.await()
-                _metros.value = resLines.result.metros
-                _rers.value = resLines.result.rers
-                _tramways.value = resLines.result.tramways
-                _buses.value = resLines.result.buses
-                _noctiliens.value = resLines.result.noctiliens
-
-                val resTraffic = getTrafficDeferred.await()
-                _trafficMetros.value = resTraffic.result.metros
-                _trafficRers.value = resTraffic.result.rers
-                _trafficTramways.value = resTraffic.result.tramways
-            } catch (e: Exception) {
-                //_response.value = "Failure: ${e.message}"
-            }
-        }
-    }
-
+    // navigation
     fun navigateToStations(navigating: Boolean, line: Line?, lineType: String?) {
         _navigateToStations.value = navigating
         _line.value = line
