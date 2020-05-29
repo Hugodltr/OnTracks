@@ -15,19 +15,18 @@
         tools:context="com.epf.ontracks.stationslist.StationsListFragment">
 
         <TextView
-            android:id="@+id/schedule_time"
+            android:id="@+id/rer_schedule_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/stations_list"
+            android:text="@{stationsListViewModel.line.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="@{stationsListViewModel.line.name}"
-            tools:text="Metro 1"/>
+            tools:text="Metro 1"
+            android:padding="8dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stations_list"
@@ -35,11 +34,12 @@
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/schedule_time"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            app:layout_constraintTop_toBottomOf="@+id/rer_schedule_time" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

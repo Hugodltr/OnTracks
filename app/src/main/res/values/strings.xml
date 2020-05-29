@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">On Tracks</string>
     <string name="metro_image_desc">Metro image</string>
-    <string name="metros_header">Liste des métros</string>
+    <string name="metros_header">Métros</string>
     <string name="toLines_button">Horaires</string>
     <string name="schedule_image">Schedule image</string>
     <string name="switch_direction_button_text">Switch Direction</string>
@@ -10,4 +10,5 @@
     <string name="app_label">On Tracks</string>
     <string name="search_hint">Search stations</string>
     <string name="traffic_state_image_description">Traffic state</string>
+    <string name="rers_header_text">Rers</string>
 </resources>

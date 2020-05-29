@@ -9,7 +9,7 @@
             type="com.epf.ontracks.network.LineWithTraffic" />
         <variable
             name="clickListener"
-            type="com.epf.ontracks.lineslist.LineListener" />
+            type="com.epf.ontracks.lineslist.MetroLineListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,57 +19,57 @@
 
 
         <ImageView
-            android:id="@+id/schedule_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/metro_image"
+            android:layout_width="35.77dp"
+            android:layout_height="35.77dp"
             android:layout_marginStart="8dp"
             android:contentDescription="@string/metro_image_desc"
-            app:layout_constraintBottom_toBottomOf="@+id/traffic_state_image"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/traffic_state_image"
-            app:lineImage="@{line}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:metroLineImage="@{line}"
             tools:src="@drawable/ic_line_metro" />
 
         <TextView
-            android:id="@+id/schedule_time"
+            android:id="@+id/metro_line"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toStartOf="@+id/traffic_state_image"
-            app:layout_constraintStart_toEndOf="@+id/schedule_image"
+            app:layout_constraintEnd_toEndOf="@+id/metro_directions"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/metro_directions"
             app:layout_constraintTop_toTopOf="parent"
             app:lineName="@{line}"
             tools:text="Métro 1" />
 
         <TextView
-            android:id="@+id/schedule_direction"
+            android:id="@+id/metro_directions"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/schedule_time"
+            app:layout_constraintEnd_toStartOf="@+id/metro_traffic_state_image"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/schedule_image"
-            app:layout_constraintTop_toBottomOf="@+id/schedule_time"
+            app:layout_constraintStart_toEndOf="@+id/metro_image"
+            app:layout_constraintTop_toBottomOf="@+id/metro_line"
             app:lineDirections="@{line}"
             tools:text="Chateau de Vincenne / Montparnasse" />
 
         <ImageView
-            android:id="@+id/traffic_state_image"
+            android:id="@+id/metro_traffic_state_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/traffic_state_image_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_alert"
             app:trafficStateImage="@{line}"
-            android:contentDescription="@string/traffic_state_image_description"/>
+            tools:src="@drawable/ic_alert" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

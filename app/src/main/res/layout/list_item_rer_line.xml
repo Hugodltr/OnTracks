@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="line"
+            type="com.epf.ontracks.network.LineWithTraffic" />
+        <variable
+            name="clickListener"
+            type="com.epf.ontracks.lineslist.RerLineListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick='@{() -> clickListener.onClick(line, "rers")}'>
+
+
+        <ImageView
+            android:id="@+id/rer_image"
+            android:layout_width="35.77dp"
+            android:layout_height="35.77dp"
+            android:layout_marginStart="8dp"
+            android:contentDescription="@string/metro_image_desc"
+            app:layout_constraintBottom_toBottomOf="@+id/rer_traffic_state_image"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rer_traffic_state_image"
+            app:rerLineImage="@{line}"
+            tools:src="@drawable/ic_line_metro" />
+
+        <TextView
+            android:id="@+id/rer_line"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/rer_directions"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/rer_directions"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineName="@{line}"
+            tools:text="Métro 1" />
+
+        <TextView
+            android:id="@+id/rer_directions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rer_traffic_state_image"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/rer_image"
+            app:layout_constraintTop_toBottomOf="@+id/rer_line"
+            app:lineDirections="@{line}"
+            tools:text="Chateau de Vincenne / Montparnasse" />
+
+        <ImageView
+            android:id="@+id/rer_traffic_state_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_alert"
+            app:trafficStateImage="@{line}"
+            android:contentDescription="@string/traffic_state_image_description"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

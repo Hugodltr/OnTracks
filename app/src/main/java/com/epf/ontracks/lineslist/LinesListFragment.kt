@@ -29,15 +29,25 @@ class LinesListFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.linesListViewModel = viewModel
 
-        val adapter = LineAdapter(LineListener { line, lineType ->
+        val adapterMetro = MetroLineAdapter(MetroLineListener { line, lineType ->
+            viewModel.navigateToStations(true, line, lineType)
+        })
+        val adapterRer = RerLineAdapter(RerLineListener() { line, lineType ->
             viewModel.navigateToStations(true, line, lineType)
         })
 
-        binding.linesList.adapter = adapter
+        binding.metroLinesList.adapter = adapterMetro
+        binding.rersLinesList.adapter = adapterRer
 
         viewModel.metros.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.submitList(it)
+                adapterMetro.submitList(it)
+            }
+        })
+
+        viewModel.rers.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapterRer.submitList(it)
             }
         })
 

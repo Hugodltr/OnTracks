@@ -20,7 +20,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("Hugo", "create splash screen")
 
         getLines()
     }
@@ -34,9 +33,9 @@ class SplashActivity : AppCompatActivity() {
                 val resLines = getLinesDeferred.await()
                 val resTraffic = getTrafficDeferred.await()
                 val metros: ArrayList<LineWithTraffic> = ArrayList()
+                val rers: ArrayList<LineWithTraffic> = ArrayList()
 
                 resLines.result.metros.forEachIndexed { index, line ->
-                    Log.i("Hugo", "add traffic with line $index")
                     if(index < resTraffic.result.metros.size) {
                         metros.add(LineWithTraffic(
                             code = line.code,
@@ -50,7 +49,23 @@ class SplashActivity : AppCompatActivity() {
                     }
                 }
 
-                LinesWithTraffic.make(metros, metros, metros, metros, metros)
+                resLines.result.rers.forEach { line ->
+                    resTraffic.result.rers.forEach { lineTraffic ->
+                        if(lineTraffic.line == line.code) {
+                            rers.add(LineWithTraffic(
+                                code = line.code,
+                                name = line.name,
+                                directions = line.directions,
+                                id = line.id,
+                                slug = lineTraffic.slug,
+                                title = lineTraffic.title,
+                                message = lineTraffic.message
+                            ))
+                        }
+                    }
+                }
+
+                LinesWithTraffic.make(metros, rers, metros, metros, metros)
 
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)

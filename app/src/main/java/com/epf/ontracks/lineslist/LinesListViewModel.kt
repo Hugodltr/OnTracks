@@ -53,7 +53,7 @@ class LinesListViewModel : ViewModel() {
 
     init {
         _metros.value = LinesWithTraffic.metros
-        //_rers.value = lines.rers
+        _rers.value = LinesWithTraffic.rers
         //_tramways.value = lines.tramways
         //_buses.value = lines.buses
         //_noctiliens.value = lines.noctiliens
@@ -61,9 +61,9 @@ class LinesListViewModel : ViewModel() {
 
     // navigation
     fun navigateToStations(navigating: Boolean, line: LineWithTraffic?, lineType: String?) {
-        _navigateToStations.value = navigating
         _line.value = line
         _lineType.value = lineType
+        _navigateToStations.value = navigating
     }
 
     override fun onCleared() {

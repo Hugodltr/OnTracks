@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.epf.ontracks.databinding.ListItemLineBinding
+import com.epf.ontracks.databinding.ListItemRerLineBinding
 import com.epf.ontracks.network.LineWithTraffic
 
 
-class LineAdapter(private val clickListener: LineListener) : ListAdapter<LineWithTraffic, LineAdapter.ViewHolder>(LineDiffCallback()) {
+class RerLineAdapter(private val clickListener: RerLineListener) : ListAdapter<LineWithTraffic, RerLineAdapter.ViewHolder>(RerLineDiffCallback()) {
+
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
@@ -19,8 +20,8 @@ class LineAdapter(private val clickListener: LineListener) : ListAdapter<LineWit
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(private val binding: ListItemLineBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: LineWithTraffic, clickListener: LineListener) {
+    class ViewHolder private constructor(private val binding: ListItemRerLineBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(item: LineWithTraffic, clickListener: RerLineListener) {
             binding.line = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -29,7 +30,7 @@ class LineAdapter(private val clickListener: LineListener) : ListAdapter<LineWit
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
                 val layoutInflater = LayoutInflater.from(parent.context)
-                val binding = ListItemLineBinding.inflate(layoutInflater, parent, false)
+                val binding = ListItemRerLineBinding.inflate(layoutInflater, parent, false)
 
                 return ViewHolder(binding)
             }
@@ -37,7 +38,7 @@ class LineAdapter(private val clickListener: LineListener) : ListAdapter<LineWit
     }
 }
 
-class LineDiffCallback : DiffUtil.ItemCallback<LineWithTraffic>() {
+class RerLineDiffCallback : DiffUtil.ItemCallback<LineWithTraffic>() {
     override fun areItemsTheSame(oldItem: LineWithTraffic, newItem: LineWithTraffic): Boolean {
         return oldItem.id == newItem.id
     }
@@ -47,6 +48,6 @@ class LineDiffCallback : DiffUtil.ItemCallback<LineWithTraffic>() {
     }
 }
 
-class LineListener(val clickListener: (line: LineWithTraffic, lineType: String) -> Unit) {
+class RerLineListener(val clickListener: (line: LineWithTraffic, lineType: String) -> Unit) {
     fun onClick(line: LineWithTraffic, lineType: String) = clickListener(line, lineType)
 }

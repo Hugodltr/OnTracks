@@ -15,33 +15,80 @@
         tools:context=".lineslist.LinesListFragment"
         android:clickable="false">
 
-        <TextView
-            android:id="@+id/metro_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+        <com.emilsjolander.components.StickyScrollViewItems.StickyScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/metros_header"
-            app:layout_constraintBottom_toTopOf="@+id/lines_list"
+            android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lines_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/metro_header"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/metro_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/metros_header"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:tag="sticky"
+                    android:background="@color/white"/>
+                
+                <RelativeLayout
+                    android:id="@+id/metro_lines_list_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/metro_header">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/metro_lines_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/rers_header"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@string/rers_header_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/metro_lines_list_container"
+                    android:tag="sticky"
+                    android:background="@color/white"/>
+
+               <RelativeLayout
+                   android:id="@+id/rers_lines_list_container"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/rers_header">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rers_lines_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+               </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

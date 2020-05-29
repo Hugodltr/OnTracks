@@ -5,15 +5,23 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.epf.ontracks.R
 import com.epf.ontracks.network.LineWithTraffic
+import java.util.*
 
-@BindingAdapter("lineImage")
-fun ImageView.setLineImage(item: LineWithTraffic?) {
+@BindingAdapter("metroLineImage")
+fun ImageView.setMetroLineImage(item: LineWithTraffic?) {
     item?.let {
-        setImageResource(when (item.id) {
-            "62" -> R.drawable.ic_line_metro_1
-            "77" -> R.drawable.ic_ligne_rer_a
-            else -> R.drawable.ic_line_metro
-        })
+        setImageResource(
+            resources.getIdentifier("com.epf.ontracks:drawable/_m${item.code}genrvb", null, null)
+        )
+    }
+}
+
+@BindingAdapter("rerLineImage")
+fun ImageView.setRerLineImage(item: LineWithTraffic?) {
+    item?.let {
+        setImageResource(
+            resources.getIdentifier("com.epf.ontracks:drawable/_rer${item.code.toLowerCase(Locale.ROOT)}genrvb", null, null)
+        )
     }
 }
 
@@ -23,6 +31,7 @@ fun TextView.setLineNameString(item: LineWithTraffic?) {
         text = item.name
     }
 }
+
 
 @BindingAdapter("lineDirections")
 fun TextView.setLineDirectionsString(item: LineWithTraffic?) {
