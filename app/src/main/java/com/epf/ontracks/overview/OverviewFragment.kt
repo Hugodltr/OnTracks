@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.epf.ontracks.MainActivity
 import com.epf.ontracks.R
 import com.epf.ontracks.database.FavoriteDatabase
 import com.epf.ontracks.databinding.OverviewFragmentBinding
@@ -23,6 +24,8 @@ class OverviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        (activity as MainActivity).supportActionBar?.title = "On Tracks"
+
         val application = requireNotNull(this.activity).application
         val dataSource = FavoriteDatabase.getInstance(application).favoriteDatabaseDao
 

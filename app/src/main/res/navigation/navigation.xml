@@ -12,13 +12,25 @@
         tools:layout="@layout/overview_fragment">
         <action
             android:id="@+id/action_overviewFragment_to_linesListFragment"
-            app:destination="@id/linesListFragment" />
+            app:destination="@id/linesListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_overviewFragment_to_stationFragment"
-            app:destination="@id/stationFragment" />
+            app:destination="@id/stationFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_overviewFragment_to_scannerFragment"
-            app:destination="@id/scannerFragment" />
+            app:destination="@id/scannerFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/linesListFragment"
@@ -27,7 +39,11 @@
         tools:layout="@layout/lines_list_fragment">
         <action
             android:id="@+id/action_linesListFragment_to_stationsListFragment"
-            app:destination="@id/stationsListFragment" />
+            app:destination="@id/stationsListFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/stationsListFragment"
@@ -42,7 +58,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_stationsListFragment_to_stationFragment"
-            app:destination="@id/stationFragment" />
+            app:destination="@id/stationFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/stationFragment"
@@ -68,6 +88,10 @@
         android:label="ScannerFragment" >
         <action
             android:id="@+id/action_scannerFragment_to_stationFragment"
-            app:destination="@id/stationFragment" />
+            app:destination="@id/stationFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 </navigation>

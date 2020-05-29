@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.epf.ontracks.MainActivity
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 
@@ -17,6 +18,8 @@ class ScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        (activity as MainActivity).supportActionBar?.title = "Scanner un QR code"
+
         mScannerView = ZXingScannerView(activity)
 
         return mScannerView
