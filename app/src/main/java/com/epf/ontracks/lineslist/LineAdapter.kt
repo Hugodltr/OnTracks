@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.epf.ontracks.databinding.ListItemLineBinding
+import com.epf.ontracks.network.LineWithTraffic
 
 
-class LineAdapter(private val clickListener: LineListener) : ListAdapter<Line, LineAdapter.ViewHolder>(LineDiffCallback()) {
+class LineAdapter(private val clickListener: LineListener) : ListAdapter<LineWithTraffic, LineAdapter.ViewHolder>(LineDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
@@ -19,7 +20,7 @@ class LineAdapter(private val clickListener: LineListener) : ListAdapter<Line, L
     }
 
     class ViewHolder private constructor(private val binding: ListItemLineBinding) : RecyclerView.ViewHolder(binding.root){
-        fun bind(item: Line,clickListener: LineListener) {
+        fun bind(item: LineWithTraffic, clickListener: LineListener) {
             binding.line = item
             binding.clickListener = clickListener
             binding.executePendingBindings()
@@ -36,16 +37,16 @@ class LineAdapter(private val clickListener: LineListener) : ListAdapter<Line, L
     }
 }
 
-class LineDiffCallback : DiffUtil.ItemCallback<Line>() {
-    override fun areItemsTheSame(oldItem: Line, newItem: Line): Boolean {
+class LineDiffCallback : DiffUtil.ItemCallback<LineWithTraffic>() {
+    override fun areItemsTheSame(oldItem: LineWithTraffic, newItem: LineWithTraffic): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: Line, newItem: Line): Boolean {
-        return oldItem == newItem
+    override fun areContentsTheSame(oldItem: LineWithTraffic, newItem: LineWithTraffic): Boolean {
+        return oldItem.id == newItem.id && newItem.message == newItem.message && oldItem.slug == oldItem.slug
     }
 }
 
-class LineListener(val clickListener: (line: Line, lineType: String) -> Unit) {
-    fun onClick(line: Line, lineType: String) = clickListener(line, lineType)
+class LineListener(val clickListener: (line: LineWithTraffic, lineType: String) -> Unit) {
+    fun onClick(line: LineWithTraffic, lineType: String) = clickListener(line, lineType)
 }

@@ -2,9 +2,10 @@ package com.epf.ontracks.stationslist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.epf.ontracks.lineslist.Line
+import com.epf.ontracks.network.LineWithTraffic
 
-class StationsListViewModelFactory(private val line: Line, private val type: String): ViewModelProvider.Factory {
+@Suppress("UNCHECKED_CAST")
+class StationsListViewModelFactory(private val line: LineWithTraffic, private val type: String): ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(StationsListViewModel::class.java)) {

@@ -2,7 +2,10 @@ package com.epf.ontracks
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.epf.ontracks.network.LineWithTraffic
+import com.epf.ontracks.network.LinesWithTraffic
 import com.epf.ontracks.network.RatpApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,6 +20,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("Hugo", "create splash screen")
 
         getLines()
     }
@@ -29,9 +33,26 @@ class SplashActivity : AppCompatActivity() {
             try {
                 val resLines = getLinesDeferred.await()
                 val resTraffic = getTrafficDeferred.await()
+                val metros: ArrayList<LineWithTraffic> = ArrayList()
+
+                resLines.result.metros.forEachIndexed { index, line ->
+                    Log.i("Hugo", "add traffic with line $index")
+                    if(index < resTraffic.result.metros.size) {
+                        metros.add(LineWithTraffic(
+                            code = line.code,
+                            name = line.name,
+                            directions = line.directions,
+                            id = line.id,
+                            slug = resTraffic.result.metros[index].slug,
+                            title = resTraffic.result.metros[index].title,
+                            message = resTraffic.result.metros[index].message
+                        ))
+                    }
+                }
+
+                LinesWithTraffic.make(metros, metros, metros, metros, metros)
 
                 val intent = Intent(applicationContext, MainActivity::class.java)
-                intent.putExtra("LINES", resLines.result)
                 startActivity(intent)
 
                 finish()
@@ -40,4 +61,6 @@ class SplashActivity : AppCompatActivity() {
             }
         }
     }
+
+
 }

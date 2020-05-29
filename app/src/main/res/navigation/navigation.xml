@@ -36,7 +36,7 @@
         tools:layout="@layout/stations_list_fragment">
         <argument
             android:name="line"
-            app:argType="com.epf.ontracks.lineslist.Line" />
+            app:argType="com.epf.ontracks.network.LineWithTraffic" />
         <argument
             android:name="lineType"
             app:argType="string" />

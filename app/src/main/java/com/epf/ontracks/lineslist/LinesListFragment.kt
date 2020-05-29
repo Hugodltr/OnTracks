@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.epf.ontracks.MainActivity
 import com.epf.ontracks.R
 import com.epf.ontracks.databinding.LinesListFragmentBinding
 
@@ -17,18 +16,12 @@ class LinesListFragment : Fragment() {
 
     private lateinit var binding : LinesListFragmentBinding
     private lateinit var viewModel: LinesListViewModel
-    private lateinit var viewModelFactory: LinesListViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.lines_list_fragment,container,false)
-
-        val mainActivity = activity as MainActivity
-        mainActivity.lines?.let {
-            viewModelFactory = LinesListViewModelFactory(mainActivity.lines!!)
-        }
-        viewModel = ViewModelProvider(this, viewModelFactory).get(LinesListViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(LinesListViewModel::class.java)
 
         binding.lifecycleOwner = this
         binding.linesListViewModel = viewModel

@@ -26,8 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Metro 1"
-            android:text="@{stationsListViewModel.station.name}"/>
+            android:text="@{stationsListViewModel.line.name}"
+            tools:text="Metro 1"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stations_list"

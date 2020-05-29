@@ -6,7 +6,7 @@
     <data>
         <variable
             name="line"
-            type="com.epf.ontracks.lineslist.Line" />
+            type="com.epf.ontracks.network.LineWithTraffic" />
         <variable
             name="clickListener"
             type="com.epf.ontracks.lineslist.LineListener" />
@@ -20,19 +20,16 @@
 
         <ImageView
             android:id="@+id/schedule_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="@string/metro_image_desc"
+            app:layout_constraintBottom_toBottomOf="@+id/traffic_state_image"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:src="@drawable/ic_line_metro"
+            app:layout_constraintTop_toTopOf="@+id/traffic_state_image"
             app:lineImage="@{line}"
-            android:contentDescription="@string/metro_image_desc"/>
+            tools:src="@drawable/ic_line_metro" />
 
         <TextView
             android:id="@+id/schedule_time"
@@ -41,8 +38,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintEnd_toStartOf="@+id/traffic_state_image"
             app:layout_constraintStart_toEndOf="@+id/schedule_image"
             app:layout_constraintTop_toTopOf="parent"
             app:lineName="@{line}"
@@ -54,7 +50,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/schedule_time"
@@ -63,6 +58,18 @@
             app:layout_constraintTop_toBottomOf="@+id/schedule_time"
             app:lineDirections="@{line}"
             tools:text="Chateau de Vincenne / Montparnasse" />
+
+        <ImageView
+            android:id="@+id/traffic_state_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_alert"
+            app:trafficStateImage="@{line}"
+            android:contentDescription="@string/traffic_state_image_description"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
