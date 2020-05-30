@@ -1,7 +1,12 @@
 package com.epf.ontracks
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.epf.ontracks.network.LineWithTraffic

@@ -1,9 +1,11 @@
 package com.epf.ontracks.lineslist
 
+import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.SearchView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,11 +14,35 @@ import androidx.navigation.fragment.findNavController
 import com.epf.ontracks.MainActivity
 import com.epf.ontracks.R
 import com.epf.ontracks.databinding.LinesListFragmentBinding
+import java.util.*
+
 
 class LinesListFragment : Fragment() {
 
     private lateinit var binding : LinesListFragmentBinding
     private lateinit var viewModel: LinesListViewModel
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+
+        inflater.inflate(R.menu.lines_menu, menu)
+
+        val searchItem = menu.findItem(R.id.action_search)
+        val searchView: SearchView = searchItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String): Boolean {
+                viewModel.filterLines(newText.toLowerCase(Locale.ROOT))
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String): Boolean {
+                viewModel.filterLines(query.toLowerCase(Locale.ROOT))
+                searchView.clearFocus()
+                return false
+            }
+        })
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -58,7 +84,14 @@ class LinesListFragment : Fragment() {
             }
         })
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
+    override fun onStop() {
+        val imm = requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
+        super.onStop()
+    }
 }

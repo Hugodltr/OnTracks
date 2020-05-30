@@ -8,7 +8,7 @@
     <string name="favorite_text">Vos favoris</string>
     <string name="barcodeButton_text">Scanner un QR Code</string>
     <string name="app_label">On Tracks</string>
-    <string name="search_hint">Search stations</string>
     <string name="traffic_state_image_description">Traffic state</string>
     <string name="rers_header_text">Rers</string>
+    <string name="action_search">Search lines</string>
 </resources>

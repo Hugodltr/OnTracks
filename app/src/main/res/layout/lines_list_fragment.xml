@@ -25,14 +25,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/metro_header"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/metros_header"
@@ -61,7 +61,7 @@
 
                 <TextView
                     android:id="@+id/rers_header"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/rers_header_text"
@@ -87,7 +87,7 @@
 
                </RelativeLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
         </com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

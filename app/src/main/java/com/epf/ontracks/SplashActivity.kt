@@ -20,7 +20,6 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         getLines()
     }
 
@@ -49,9 +48,18 @@ class SplashActivity : AppCompatActivity() {
                     }
                 }
 
+                var rerC = false
+                var rerE = false
+                var rerD = false
                 resLines.result.rers.forEach { line ->
+                    if((line.code != "C" || !rerC) && (line.code != "D" || !rerD) && (line.code != "E" || !rerE))
                     resTraffic.result.rers.forEach { lineTraffic ->
                         if(lineTraffic.line == line.code) {
+                            when(line.code) {
+                                "C" -> rerC = true
+                                "D" -> rerD = true
+                                "E" -> rerE = true
+                            }
                             rers.add(LineWithTraffic(
                                 code = line.code,
                                 name = line.name,
@@ -72,7 +80,7 @@ class SplashActivity : AppCompatActivity() {
 
                 finish()
             } catch (e: Exception) {
-                //_response.value = "Failure: ${e.message}"
+                Log.i("Hugo", "Failure : $e")
             }
         }
     }

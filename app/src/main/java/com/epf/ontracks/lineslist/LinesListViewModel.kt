@@ -1,5 +1,6 @@
 package com.epf.ontracks.lineslist
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,8 @@ import com.epf.ontracks.network.LinesWithTraffic
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class LinesListViewModel : ViewModel() {
@@ -25,12 +28,12 @@ class LinesListViewModel : ViewModel() {
     val tramways: LiveData<List<LineWithTraffic>>
         get() = _tramways
 
-    private val _buses = MutableLiveData<List<LineWithTraffic>>()
-    val buses: LiveData<List<LineWithTraffic>>
+    private val _buses = MutableLiveData<List<Line>>()
+    val buses: LiveData<List<Line>>
         get() = _buses
 
-    private val _noctiliens = MutableLiveData<List<LineWithTraffic>>()
-    val noctiliens: LiveData<List<LineWithTraffic>>
+    private val _noctiliens = MutableLiveData<List<Line>>()
+    val noctiliens: LiveData<List<Line>>
         get() = _noctiliens
 
     // coroutine
@@ -51,6 +54,7 @@ class LinesListViewModel : ViewModel() {
     val lineType: LiveData<String>
         get() = _lineType
 
+
     init {
         _metros.value = LinesWithTraffic.metros
         _rers.value = LinesWithTraffic.rers
@@ -69,6 +73,32 @@ class LinesListViewModel : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun filterLines(query : String) {
+        if(query.isEmpty()) {
+            _metros.value = LinesWithTraffic.metros
+            _rers.value = LinesWithTraffic.rers
+        } else {
+            val metrosRes: MutableList<LineWithTraffic> = ArrayList()
+            val rerRes: MutableList<LineWithTraffic> = ArrayList()
+
+            LinesWithTraffic.metros.forEach { metro ->
+            if(metro.name.toLowerCase(Locale.ROOT).contains(query) || metro.directions.toLowerCase(Locale.ROOT).contains(query)) {
+                    metrosRes.add(metro)
+                }
+            }
+
+            LinesWithTraffic.rers.forEach { rer ->
+                if(rer.name.toLowerCase(Locale.ROOT).contains(query) || rer.directions.toLowerCase(Locale.ROOT).contains(query)) {
+                    rerRes.add(rer)
+                }
+            }
+
+            _metros.value = metrosRes
+            _rers.value = rerRes
+        }
+
     }
 
 }
