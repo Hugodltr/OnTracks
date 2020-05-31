@@ -69,7 +69,7 @@ class OverviewFragment : Fragment() {
             }
         })
 
-        viewModel.navigateToScanner.observe(viewLifecycleOwner, Observer { navigating ->
+        viewModel.navigateToScanner.observe(viewLifecycleOwner, Observer {
             this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToScannerFragment())
             viewModel.navigateToLines(false)
         })

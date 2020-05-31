@@ -19,6 +19,7 @@ class SplashActivity : AppCompatActivity() {
     private val coroutineScope = CoroutineScope(activityJob + Dispatchers.Main )
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
         super.onCreate(savedInstanceState)
         getLines()
     }
@@ -31,8 +32,12 @@ class SplashActivity : AppCompatActivity() {
             try {
                 val resLines = getLinesDeferred.await()
                 val resTraffic = getTrafficDeferred.await()
+
                 val metros: ArrayList<LineWithTraffic> = ArrayList()
                 val rers: ArrayList<LineWithTraffic> = ArrayList()
+                val tramways: ArrayList<LineWithTraffic> = ArrayList()
+                val buses: ArrayList<LineWithTraffic> = ArrayList()
+                val noctiliens: ArrayList<LineWithTraffic> = ArrayList()
 
                 resLines.result.metros.forEachIndexed { index, line ->
                     if(index < resTraffic.result.metros.size) {
@@ -73,7 +78,45 @@ class SplashActivity : AppCompatActivity() {
                     }
                 }
 
-                LinesWithTraffic.make(metros, rers, metros, metros, metros)
+                resLines.result.tramways.forEachIndexed { index, line ->
+                    if(index < resTraffic.result.tramways.size) {
+                        tramways.add(LineWithTraffic(
+                            code = line.code,
+                            name = line.name,
+                            directions = line.directions,
+                            id = line.id,
+                            slug = resTraffic.result.tramways[index].slug,
+                            title = resTraffic.result.tramways[index].title,
+                            message = resTraffic.result.tramways[index].message
+                        ))
+                    }
+                }
+
+                resLines.result.buses.forEach { line ->
+                    buses.add(LineWithTraffic(
+                        code = line.code,
+                        name = line.name,
+                        directions = line.directions,
+                        id = line.id,
+                        slug = "",
+                        title = "",
+                        message = ""
+                    ))
+                }
+
+                resLines.result.noctiliens.forEach { line ->
+                    noctiliens.add(LineWithTraffic(
+                        code = line.code,
+                        name = line.name,
+                        directions = line.directions,
+                        id = line.id,
+                        slug = "",
+                        title = "",
+                        message = ""
+                    ))
+                }
+
+                LinesWithTraffic.make(metros, rers, tramways, buses, noctiliens)
 
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 startActivity(intent)

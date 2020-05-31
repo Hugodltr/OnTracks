@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
         <variable
             name="linesListViewModel"
             type="com.epf.ontracks.lineslist.LinesListViewModel" />
@@ -12,83 +13,93 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".lineslist.LinesListFragment"
-        android:clickable="false">
+        android:clickable="false"
+        tools:context=".lineslist.LinesListFragment">
 
-        <com.emilsjolander.components.StickyScrollViewItems.StickyScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <Button
+            android:id="@+id/metros_filter_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick='@{() -> linesListViewModel.showLines("metros")}'
+            android:text='@{linesListViewModel.showLines == "metros" ? "Hide metro" : "Show metro"}'
+            android:clickable='@{linesListViewModel.showLines != "metros"}'
+            app:layout_constraintEnd_toStartOf="@+id/rers_filter_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Hide Metro" />
+
+        <Button
+            android:id="@+id/rers_filter_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick='@{() -> linesListViewModel.showLines("rers")}'
+            android:text='@{linesListViewModel.showLines == "rers" ? "Hide rers" : "Show rers"}'
+            android:clickable='@{linesListViewModel.showLines != "rers"}'
+            app:layout_constraintBottom_toBottomOf="@+id/metros_filter_button"
+            app:layout_constraintEnd_toStartOf="@+id/tramways_filter_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/metros_filter_button"
+            app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
+            tools:text="Hide Rers" />
+
+        <Button
+            android:id="@+id/tramways_filter_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/metros_filter_button"
+            app:layout_constraintEnd_toStartOf="@+id/buses_filter_button"
+            android:clickable='@{linesListViewModel.showLines != "tramways"}'
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/rers_filter_button"
+            app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
+            android:onClick='@{() -> linesListViewModel.showLines("tramways")}'
+            android:text='@{linesListViewModel.showLines == "tramways" ? "Hide tram" : "Show tram"}'
+            tools:text="Hide tram"/>
+
+        <Button
+            android:id="@+id/buses_filter_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/metros_filter_button"
+            app:layout_constraintEnd_toStartOf="@+id/noctiliens_filter_button"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tramways_filter_button"
+            app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
+            tools:text="Hide buses"
+            android:onClick='@{() -> linesListViewModel.showLines("buses")}'
+            android:text='@{linesListViewModel.showLines == "buses" ? "Hide buses" : "Show buses"}'
+            android:clickable='@{linesListViewModel.showLines != "buses"}'/>
+
+        <Button
+            android:id="@+id/noctiliens_filter_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/metros_filter_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/buses_filter_button"
+            app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
+            tools:text="Hide noct"
+            android:onClick='@{() -> linesListViewModel.showLines("noctiliens")}'
+            android:text='@{linesListViewModel.showLines == "noctiliens" ? "Hide noct" : "Show noct"}'
+            android:clickable='@{linesListViewModel.showLines != "noctiliens"}'/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/lines_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/metro_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/metros_header"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:tag="sticky"
-                    android:background="@color/white"/>
-                
-                <RelativeLayout
-                    android:id="@+id/metro_lines_list_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/metro_header">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/metro_lines_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:id="@+id/rers_header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:text="@string/rers_header_text"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/metro_lines_list_container"
-                    android:tag="sticky"
-                    android:background="@color/white"/>
-
-               <RelativeLayout
-                   android:id="@+id/rers_lines_list_container"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@+id/rers_header">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rers_lines_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-
-               </RelativeLayout>
-
-    </LinearLayout>
-        </com.emilsjolander.components.StickyScrollViewItems.StickyScrollView>
+            app:layout_constraintTop_toBottomOf="@+id/metros_filter_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -16,29 +16,14 @@ import kotlin.collections.ArrayList
 class LinesListViewModel : ViewModel() {
 
     // live data
-    private val _metros = MutableLiveData<List<LineWithTraffic>>()
-    val metros: LiveData<List<LineWithTraffic>>
-        get() = _metros
+    private val _lines = MutableLiveData<List<LineWithTraffic>>()
+    val lines: LiveData<List<LineWithTraffic>>
+        get() = _lines
 
-    private val _rers = MutableLiveData<List<LineWithTraffic>>()
-    val rers: LiveData<List<LineWithTraffic>>
-        get() = _rers
-
-    private val _tramways = MutableLiveData<List<LineWithTraffic>>()
-    val tramways: LiveData<List<LineWithTraffic>>
-        get() = _tramways
-
-    private val _buses = MutableLiveData<List<Line>>()
-    val buses: LiveData<List<Line>>
-        get() = _buses
-
-    private val _noctiliens = MutableLiveData<List<Line>>()
-    val noctiliens: LiveData<List<Line>>
-        get() = _noctiliens
-
-    // coroutine
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
+    // show lines
+    private var _showLines = MutableLiveData<String>()
+    val showLines: LiveData<String>
+        get() = _showLines
 
     // navigation
     private val _navigateToStations = MutableLiveData<Boolean>()
@@ -56,11 +41,8 @@ class LinesListViewModel : ViewModel() {
 
 
     init {
-        _metros.value = LinesWithTraffic.metros
-        _rers.value = LinesWithTraffic.rers
-        //_tramways.value = lines.tramways
-        //_buses.value = lines.buses
-        //_noctiliens.value = lines.noctiliens
+        _lines.value = LinesWithTraffic.metros
+        _showLines.value = "metros"
     }
 
     // navigation
@@ -70,35 +52,113 @@ class LinesListViewModel : ViewModel() {
         _navigateToStations.value = navigating
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
+    // show lines
+    fun showLines(linesType: String) {
+        _lines.value = when(linesType) {
+            "rers" -> LinesWithTraffic.rers
+            "tramways" -> LinesWithTraffic.tramways
+            "buses" -> LinesWithTraffic.buses
+            "noctiliens" -> LinesWithTraffic.noctiliens
+            else -> LinesWithTraffic.metros
+        }
+        _showLines.value = linesType
     }
 
+    // search
     fun filterLines(query : String) {
         if(query.isEmpty()) {
-            _metros.value = LinesWithTraffic.metros
-            _rers.value = LinesWithTraffic.rers
+            _lines.value = when(_showLines.value) {
+                "rers" -> LinesWithTraffic.rers
+                "tramways" -> LinesWithTraffic.tramways
+                "buses" -> LinesWithTraffic.buses
+                "noctiliens" -> LinesWithTraffic.noctiliens
+                else -> LinesWithTraffic.metros
+            }
         } else {
-            val metrosRes: MutableList<LineWithTraffic> = ArrayList()
-            val rerRes: MutableList<LineWithTraffic> = ArrayList()
-
-            LinesWithTraffic.metros.forEach { metro ->
-            if(metro.name.toLowerCase(Locale.ROOT).contains(query) || metro.directions.toLowerCase(Locale.ROOT).contains(query)) {
-                    metrosRes.add(metro)
-                }
+            when(_showLines.value) {
+                "rers" -> filterRers(query)
+                "tramways" -> filterTramways(query)
+                "buses" -> filterBuses(query)
+                "noctiliens" -> filterNoctiliens(query)
+                else -> filterMetros(query)
             }
-
-            LinesWithTraffic.rers.forEach { rer ->
-                if(rer.name.toLowerCase(Locale.ROOT).contains(query) || rer.directions.toLowerCase(Locale.ROOT).contains(query)) {
-                    rerRes.add(rer)
-                }
-            }
-
-            _metros.value = metrosRes
-            _rers.value = rerRes
         }
-
     }
 
+    private fun filterNoctiliens(query: String) {
+        val filteredLines: MutableList<LineWithTraffic> = ArrayList()
+
+        LinesWithTraffic.noctiliens.forEach { noctiliens ->
+            if (noctiliens.name.toLowerCase(Locale.ROOT)
+                    .contains(query) || noctiliens.directions.toLowerCase(
+                    Locale.ROOT
+                ).contains(query)
+            ) {
+                filteredLines.add(noctiliens)
+            }
+        }
+
+        _lines.value = filteredLines
+    }
+
+    private fun filterBuses(query: String) {
+        val filteredLines: MutableList<LineWithTraffic> = ArrayList()
+
+        LinesWithTraffic.buses.forEach { bus ->
+            if (bus.name.toLowerCase(Locale.ROOT).contains(query) || bus.directions.toLowerCase(
+                    Locale.ROOT
+                ).contains(query)
+            ) {
+                filteredLines.add(bus)
+            }
+        }
+
+        _lines.value = filteredLines
+    }
+
+    private fun filterTramways(query: String) {
+        val filteredLines: MutableList<LineWithTraffic> = ArrayList()
+
+        LinesWithTraffic.tramways.forEach { tramway ->
+            if (tramway.name.toLowerCase(Locale.ROOT)
+                    .contains(query) || tramway.directions.toLowerCase(
+                    Locale.ROOT
+                ).contains(query)
+            ) {
+                filteredLines.add(tramway)
+            }
+        }
+
+        _lines.value = filteredLines
+    }
+
+    private fun filterRers(query: String) {
+        val filteredLines: MutableList<LineWithTraffic> = ArrayList()
+
+        LinesWithTraffic.rers.forEach { rer ->
+            if (rer.name.toLowerCase(Locale.ROOT).contains(query) || rer.directions.toLowerCase(
+                    Locale.ROOT
+                ).contains(query)
+            ) {
+                filteredLines.add(rer)
+            }
+        }
+
+        _lines.value = filteredLines
+    }
+
+    private fun filterMetros(query: String) {
+        val filteredLines: MutableList<LineWithTraffic> = ArrayList()
+
+        LinesWithTraffic.metros.forEach { metro ->
+            if (metro.name.toLowerCase(Locale.ROOT).contains(query) || metro.directions.toLowerCase(
+                    Locale.ROOT
+                ).contains(query)
+            ) {
+                filteredLines.add(metro)
+            }
+        }
+
+        _lines.value = filteredLines
+    }
 }

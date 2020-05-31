@@ -11,4 +11,8 @@
     <string name="traffic_state_image_description">Traffic state</string>
     <string name="rers_header_text">Rers</string>
     <string name="action_search">Search lines</string>
+    <string name="tramway_image_desc">Tramway image</string>
+    <string name="bus_image_desc">Bus image</string>
+    <string name="noctilien_image_desc">Noctilien image</string>
+    <string name="line_image_desc">Line image</string>
 </resources>
