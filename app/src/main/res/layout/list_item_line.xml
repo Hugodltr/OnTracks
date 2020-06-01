@@ -15,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/textview_border"
         android:onClick='@{() -> clickListener.onClick(line)}'>
 
 
@@ -29,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:lineImage="@{line}"
-            tools:src="@drawable/bus"/>
+            tools:src="@drawable/bus" />
 
         <TextView
             android:id="@+id/line_name"
@@ -61,15 +62,15 @@
 
         <ImageView
             android:id="@+id/line_traffic_state_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_width="20dp"
+            android:layout_height="13dp"
+            android:layout_marginEnd="88dp"
             android:contentDescription="@string/traffic_state_image_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:trafficStateImage="@{line}"
-            tools:src="@drawable/ic_alert" />
+            app:layout_constraintVertical_bias="0.51"
+            tools:src="@drawable/ic_next" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

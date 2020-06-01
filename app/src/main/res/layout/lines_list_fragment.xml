@@ -22,33 +22,43 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="3dp"
             android:onClick='@{() -> linesListViewModel.showLines("metros")}'
-            android:text='@{linesListViewModel.showLines == "metros" ? "Hide metro" : "Show metro"}'
+            android:text='@{linesListViewModel.showLines == "metros" ? "" : "Metro"}'
             android:clickable='@{linesListViewModel.showLines != "metros"}'
             app:layout_constraintEnd_toStartOf="@+id/rers_filter_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Hide Metro" />
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"
+            tools:text="Hide Rers" />
 
         <Button
             android:id="@+id/rers_filter_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
             android:onClick='@{() -> linesListViewModel.showLines("rers")}'
-            android:text='@{linesListViewModel.showLines == "rers" ? "Hide rers" : "Show rers"}'
+            android:text='@{linesListViewModel.showLines == "rers" ? "" : "RER"}'
             android:clickable='@{linesListViewModel.showLines != "rers"}'
             app:layout_constraintBottom_toBottomOf="@+id/metros_filter_button"
             app:layout_constraintEnd_toStartOf="@+id/tramways_filter_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/metros_filter_button"
             app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
-            tools:text="Hide Rers" />
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"
+            tools:text="Hide Rers"
+            />
 
         <Button
             android:id="@+id/tramways_filter_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
             app:layout_constraintBottom_toBottomOf="@+id/metros_filter_button"
             app:layout_constraintEnd_toStartOf="@+id/buses_filter_button"
             android:clickable='@{linesListViewModel.showLines != "tramways"}'
@@ -56,21 +66,28 @@
             app:layout_constraintStart_toEndOf="@+id/rers_filter_button"
             app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
             android:onClick='@{() -> linesListViewModel.showLines("tramways")}'
-            android:text='@{linesListViewModel.showLines == "tramways" ? "Hide tram" : "Show tram"}'
+            android:text='@{linesListViewModel.showLines == "tramways" ? "" : "Tram"}'
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"
             tools:text="Hide tram"/>
 
         <Button
             android:id="@+id/buses_filter_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="3dp"
             app:layout_constraintBottom_toBottomOf="@+id/metros_filter_button"
             app:layout_constraintEnd_toStartOf="@+id/noctiliens_filter_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/tramways_filter_button"
             app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"
             tools:text="Hide buses"
             android:onClick='@{() -> linesListViewModel.showLines("buses")}'
-            android:text='@{linesListViewModel.showLines == "buses" ? "Hide buses" : "Show buses"}'
+            android:text='@{linesListViewModel.showLines == "buses" ? "" : "Bus"}'
             android:clickable='@{linesListViewModel.showLines != "buses"}'/>
 
         <Button
@@ -83,9 +100,12 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/buses_filter_button"
             app:layout_constraintTop_toTopOf="@+id/metros_filter_button"
+            android:textSize="15dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"
             tools:text="Hide noct"
             android:onClick='@{() -> linesListViewModel.showLines("noctiliens")}'
-            android:text='@{linesListViewModel.showLines == "noctiliens" ? "Hide noct" : "Show noct"}'
+            android:text='@{linesListViewModel.showLines == "noctiliens" ? "" : "Noctilien"}'
             android:clickable='@{linesListViewModel.showLines != "noctiliens"}'/>
 
 

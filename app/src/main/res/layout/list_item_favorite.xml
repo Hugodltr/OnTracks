@@ -15,7 +15,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick='@{() -> clickListener.onClick(station)}'>
+        android:onClick='@{() -> clickListener.onClick(station)}'
+        android:background="@drawable/textview_border">
 
 
         <ImageView
@@ -35,19 +36,31 @@
 
         <TextView
             android:id="@+id/station_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="276dp"
+            android:layout_height="25dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="16dp"
+            android:textSize="17dp"
+            app:favStationName="@{station}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/horaire_image"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Chateau de Vincenne"
-            app:favStationName="@{station}"/>
+            tools:text="Chateau de Vincenne" />
+
+        <ImageView
+            android:id="@+id/next_page"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:contentDescription="@string/schedule_image"
+            android:src="@drawable/ic_next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toEndOf="@+id/station_name"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

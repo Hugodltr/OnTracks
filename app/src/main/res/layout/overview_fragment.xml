@@ -22,9 +22,13 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:text="@string/favorite_text"
+            android:gravity = "center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="30dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorite_list"
@@ -49,20 +53,27 @@
             app:layout_constraintEnd_toStartOf="@+id/linesButton"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{() -> overviewViewModel.navigateToScanner(true)}"/>
+            android:onClick="@{() -> overviewViewModel.navigateToScanner(true)}"
+            android:textSize="20dp"
+            android:padding="8dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"/>
 
         <Button
             android:id="@+id/linesButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
+            android:padding="8dp"
             android:onClick="@{() -> overviewViewModel.navigateToLines(true)}"
             android:text="@string/toLines_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/toBarcode_button" />
-
+            app:layout_constraintStart_toEndOf="@+id/toBarcode_button"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/header_background"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

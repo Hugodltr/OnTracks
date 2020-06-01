@@ -20,8 +20,8 @@ class StationViewModel(val code: String, val station: Station, val type: String,
     val way: LiveData<Char>
         get() = _way
 
-    private val _favButton = MutableLiveData<String>()
-    val favButton: LiveData<String>
+    private val _favButton = MutableLiveData<Boolean>()
+    val favButton: LiveData<Boolean>
         get() = _favButton
 
 
@@ -31,7 +31,7 @@ class StationViewModel(val code: String, val station: Station, val type: String,
 
     init {
         _way.value = 'A'
-        _favButton.value = "Add to fav"
+        _favButton.value = false
         getStation()
         getSchedules()
     }
@@ -73,7 +73,7 @@ class StationViewModel(val code: String, val station: Station, val type: String,
         coroutineScope.launch {
             getStationFromDatabase()
             if(id != 0L) {
-                _favButton.value = "Remove from fav"
+                _favButton.value = true
             }
         }
     }
@@ -90,7 +90,7 @@ class StationViewModel(val code: String, val station: Station, val type: String,
     private fun addToFavorite() {
         coroutineScope.launch {
             addToFavoriteInDatabase()
-            _favButton.value = "Remove from fav"
+            _favButton.value = true
         }
     }
 
@@ -104,7 +104,7 @@ class StationViewModel(val code: String, val station: Station, val type: String,
         coroutineScope.launch {
             removeFromFavoriteInDataBase()
             id = 0L
-            _favButton.value = "Add to fav"
+            _favButton.value = false
         }
     }
 

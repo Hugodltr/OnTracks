@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="line"
+            type="com.epf.ontracks.network.LineWithTraffic" />
+        <variable
             name="stationsListViewModel"
             type="com.epf.ontracks.stationslist.StationsListViewModel" />
     </data>
@@ -16,22 +19,25 @@
 
         <TextView
             android:id="@+id/rer_schedule_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="270dp"
+            android:layout_height="68dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:background="@drawable/header_background"
+            android:gravity="center"
+            android:padding="8dp"
             android:text="@{stationsListViewModel.line.name}"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Metro 1"
-            android:padding="8dp"/>
+            tools:text="Metro 1" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/stations_list"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="370dp"
+            android:layout_height="473dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
@@ -40,6 +46,42 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rer_schedule_time" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rer_schedule_time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/rer_schedule_time"
+            app:layout_constraintVertical_bias="0.0"
+            app:lineImage="@{line}"
+            />
+
+        <TextView
+            android:id="@+id/trafic_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Trafic Status :"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/stations_list"
+            app:layout_constraintEnd_toStartOf="@+id/imageView3"
+            app:layout_constraintHorizontal_bias="0.502"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rer_schedule_time"
+            app:layout_constraintVertical_bias="0.468" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/stations_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rer_schedule_time"
+            app:trafficStateImage="@{line}"
+            tools:src="@drawable/ic_alert" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
