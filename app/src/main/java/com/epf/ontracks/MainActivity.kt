@@ -2,6 +2,7 @@ package com.epf.ontracks
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.epf.ontracks.network.LineWithTraffic
 import com.epf.ontracks.network.LinesWithTraffic
+import kotlinx.android.synthetic.main.overview_fragment.*
 
 class MainActivity : AppCompatActivity() {
     lateinit var metros: List<LineWithTraffic>

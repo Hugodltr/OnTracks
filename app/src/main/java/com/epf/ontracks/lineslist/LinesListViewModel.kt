@@ -39,6 +39,17 @@ class LinesListViewModel : ViewModel() {
     val lineType: LiveData<String>
         get() = _lineType
 
+    private val _lineButton= MutableLiveData<String>()
+    val lineButton: LiveData<String>
+        get() = _lineButton
+
+    private var _ButtonMetro= MutableLiveData<Boolean>()
+    val ButtonMetro: LiveData<Boolean>
+        get() = _ButtonMetro
+
+
+
+
 
     init {
         _lines.value = LinesWithTraffic.metros
@@ -161,4 +172,5 @@ class LinesListViewModel : ViewModel() {
 
         _lines.value = filteredLines
     }
+
 }

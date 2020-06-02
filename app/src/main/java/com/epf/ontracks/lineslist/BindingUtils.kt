@@ -52,8 +52,8 @@ fun TextView.setLineDirectionsString(item: LineWithTraffic?) {
 }
 
 @BindingAdapter("trafficStateImage")
-fun ImageView.setTrafficStateImage(item: LineWithTraffic) {
-    item.let {
+fun ImageView.setTrafficStateImage(item: LineWithTraffic?) {
+    item?.let {
         setImageResource(when (item.slug) {
             "critical" -> R.drawable.ic_critical
             "normal_trav" -> R.drawable.ic_alert

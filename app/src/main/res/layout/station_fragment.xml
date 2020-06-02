@@ -19,26 +19,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:gravity = "center"
+            android:background="@drawable/header_background"
+            android:padding="8dp"
+            android:textColor="@color/white"
             android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="@+id/switch_favorite_button"
             app:layout_constraintEnd_toStartOf="@+id/switch_favorite_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/switch_favorite_button"
             tools:text="Chateau de Vincenne" />
-
-        <TextView
-            android:id="@+id/direction_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@{stationViewModel.way.toString()}"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toStartOf="@+id/switch_favorite_button"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/station_name"
-            app:layout_constraintTop_toBottomOf="@+id/station_name"
-            app:layout_constraintBottom_toTopOf="@+id/next_train"
-            tools:text="terminus" />
 
         <Button
             android:id="@+id/switch_direction_button"
@@ -65,28 +56,44 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/schedules_list"
-            android:layout_width="383dp"
-            android:layout_height="534dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/next_train"
-            app:layout_constraintVertical_bias="0.336" />
+            app:layout_constraintTop_toBottomOf="@+id/next_train" />
 
         <TextView
             android:id="@+id/next_train"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/textview_border"
             android:text="Prochains passages"
+            android:layout_marginTop="25dp"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/schedules_list"
             app:layout_constraintEnd_toEndOf="@+id/schedules_list"
             app:layout_constraintStart_toStartOf="@+id/schedules_list"
-            app:layout_constraintTop_toBottomOf="@+id/direction_text"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/seperator" />
+
+        <TextView
+            android:id="@+id/seperator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_border"
+            android:layout_marginTop="150dp"
+            android:text=""
+            app:layout_constraintBottom_toTopOf="@+id/next_train"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/station_name" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
